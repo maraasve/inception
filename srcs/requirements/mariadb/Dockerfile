@@ -9,8 +9,8 @@ RUN apt-get update && \
 	rm -rf /var/lib/apt/lists/*
 
 COPY conf/my.cnf /etc/mysql/my.cnf
-COPY tools/init.sh /usr/local/bin/init.sh
+COPY tools/entrypoint.sh /usr/local/bin/entrypoint.sh
 
-RUN chmod +x /usr/local/bin/init.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
 
-ENTRYPOINT ["/usr/local/bin/init.sh"]
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]

@@ -2,7 +2,6 @@
 
 # if a cmd in this script fails, stop the script
 set -e
-set -x
 
 # create dir for runtime files
 mkdir -p /run/mysqld
@@ -25,15 +24,15 @@ if [ ! -d "/var/lib/mysql/${MYSQL_DATABASE}" ]; then
 	# create database
 	# create user and grant permissions
 	# change root password
-	env -u MYSQL_HOST mariadb \
-    --protocol=socket \
-    --socket=/run/mysqld/mysqld.sock \
-    -u root << EOF
-CREATE DATABASE IF NOT EXISTS ${MYSQL_DATABASE};
-CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
-GRANT ALL PRIVILEGES ON ${MYSQL_DATABASE}.* TO '${MYSQL_USER}'@'%';
-ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';
-FLUSH PRIVILEGES;
+env -u MYSQL_HOST mariadb \
+--protocol=socket \
+--socket=/run/mysqld/mysqld.sock \
+-u root << EOF
+	CREATE DATABASE IF NOT EXISTS ${MYSQL_DATABASE};
+	CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
+	GRANT ALL PRIVILEGES ON ${MYSQL_DATABASE}.* TO '${MYSQL_USER}'@'%';
+	ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';
+	FLUSH PRIVILEGES;
 EOF
 
 	env -u MYSQL_HOST mariadb-admin \

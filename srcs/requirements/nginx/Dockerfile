@@ -9,7 +9,7 @@ RUN apt-get update && \
 COPY ./conf/nginx.conf /etc/nginx/sites-available/default
 COPY ./tools/entrypoint.sh /usr/local/bin/entrypoint.sh
 
-RUN mkdir -p /etx/nginx/sll
+RUN chmod +x /usr/local/bin/entrypoint.sh
 
 EXPOSE 443
 

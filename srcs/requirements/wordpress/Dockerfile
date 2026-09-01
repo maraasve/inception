@@ -12,6 +12,8 @@ RUN apt-get update && \
 		php-zip \
 		wget \
 		curl \
+		mariadb-client \
+		sendmail \
 	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/*
 
@@ -21,9 +23,12 @@ RUN mkdir -p /var/www/html && \
 	cp -r /tmp/wordpress/* /var/www/html/ && \
 	rm -rf /tmp/wordpress /tmp/wordpress.tar.gz
 
+RUN curl -o /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
+	chmod +x /usr/local/bin/wp
+
 COPY conf/www.conf /etc/php/8.2/fpm/pool.d/www.conf
 
-COPY tools/setup.sh /usr/local/bin/setup.sh
-RUN chmod +x /usr/local/bin/setup.sh
+COPY tools/entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
 
-CMD ["usr/local/bin/setup.sh"]
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
