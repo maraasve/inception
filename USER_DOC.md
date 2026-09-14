@@ -74,7 +74,7 @@ All credentials are stored inside:
 srcs/.env
 ```
 
-Important variables include:
+Create this file `mkdir src/.env` with the following variables:
 
 - `MYSQL_DATABASE`
 - `MYSQL_USER`
@@ -84,7 +84,25 @@ Important variables include:
 - `WP_ADMIN_PASSWORD`
 - `WP_ADMIN_EMAIL`
 
-Update these values before launching the project if needed.
+DOMAIN_NAME=maraasve.42.fr
+
+MYSQL_DATABASE=wordpress
+MYSQL_USER=wpuser
+MYSQL_PASSWORD=password
+
+MYSQL_ROOT_PASSWORD=rootpassword
+MYSQL_HOST=mariadb
+
+WP_TITLE=inception
+WP_ADMIN=nimda
+WP_ADMIN_PASSWORD=drowsappnimda
+WP_ADMIN_EMAIL=maraasve@student.codam.nl
+
+KEY_FILE=/etc/ssl/private/nginx-selfsigned.key
+CERT_FILE=/etc/ssl/certs/nginx-selfsigned.crt
+
+
+Update these values before launching the project.
 
 ---
 

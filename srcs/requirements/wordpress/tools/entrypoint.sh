@@ -4,11 +4,12 @@ set -e
 
 cd /var/www/html
 
-while ! mysqladmin ping -h"$MYSQL_HOST" -u"$MYSQL_USER" -p"$MYSQL_PASSWORD" --silent; do
+while ! mariadb-admin ping -h"$MYSQL_HOST" -u"$MYSQL_USER" -p"$MYSQL_PASSWORD" --silent; do
     sleep 1
 done
 
 if [ ! -f wp-config.php ]; then
+    echo "Setting up wordpress configuration"
 	cp wp-config-sample.php wp-config.php
 
 	sed -i "s/database_name_here/${MYSQL_DATABASE}/" wp-config.php
@@ -17,7 +18,10 @@ if [ ! -f wp-config.php ]; then
 	sed -i "s/localhost/${MYSQL_HOST}/" wp-config.php
 fi
 
+echo "Configuration is ready"
+
 if ! wp core is-installed --allow-root --url="$DOMAIN_NAME"; then
+    echo "Starting wordpress installation"
     wp core install \
         --url="$DOMAIN_NAME" \
         --title="$WP_TITLE" \
@@ -26,6 +30,8 @@ if ! wp core is-installed --allow-root --url="$DOMAIN_NAME"; then
         --admin_email="$WP_ADMIN_EMAIL" \
         --allow-root
 fi
+
+echo "Wordpress is installed"
 
 chown -R www-data:www-data /var/www/html
 

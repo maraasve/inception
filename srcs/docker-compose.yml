@@ -40,7 +40,18 @@ services:
 
 volumes:
   wordpress_volume:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${HOME}/data/wordpress
+
   mariadb_volume:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${HOME}/data/mariadb
 
 networks:
   inception:

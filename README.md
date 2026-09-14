@@ -65,7 +65,7 @@ This makes the entire environment reproducible on any machine with Docker instal
 ### Clone the repository
 
 ```bash
-git clone https://github.com/<your-login>/inception.git
+git clone https://github.com/maraasve/inception.git inception
 cd inception
 ```
 
@@ -88,6 +88,9 @@ WP_ADMIN_EMAIL=admin@example.com
 WP_USER=user
 WP_USER_PASSWORD=userpassword
 WP_USER_EMAIL=user@example.com
+
+KEY_FILE=/etc/nginx/ssl/myserver.key
+CERT_FILE=/etc/nginx/ssl/myserver.crt
 ```
 
 ### Build and run
