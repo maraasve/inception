@@ -29,6 +29,11 @@ if ! wp core is-installed --allow-root --url="$DOMAIN_NAME"; then
         --admin_password="$WP_ADMIN_PASSWORD" \
         --admin_email="$WP_ADMIN_EMAIL" \
         --allow-root
+    
+    wp user create "$WP_USER" "$WP_USER_EMAIL" \
+        --user_pass="$WP_USER_PASSWORD" \
+        --role=author \
+        --allow-root
 fi
 
 echo "Wordpress is installed"

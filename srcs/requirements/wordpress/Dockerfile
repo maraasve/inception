@@ -1,7 +1,6 @@
 FROM debian:bookworm
 
 RUN apt-get update && \
-	apt-get upgrade -y && \
 	apt-get install -y \
 		php-fpm \
 		php-mysql \
@@ -13,7 +12,6 @@ RUN apt-get update && \
 		wget \
 		curl \
 		mariadb-client \
-		sendmail \
 	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/*
 
